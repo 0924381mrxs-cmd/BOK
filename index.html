@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Bankak - واجهة تجريبية</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height:100%;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Tahoma,
+        Arial,
+        sans-serif;
+    background:#f7f7f7;
+    color:#111;
+}
+
+body{
+    overflow-x:hidden;
+}
+
+/* ================= HEADER ================= */
+
+.header{
+    width:100%;
+    height:222px;
+    background:
+        linear-gradient(
+            180deg,
+            #ff0000 0%,
+            #ed0712 40%,
+            #c91c2b 100%
+        );
+    border-radius:0 0 3px 3px;
+    position:relative;
+    color:white;
+    overflow:hidden;
+}
+
+/* خط خفيف أعلى الهيدر */
+.header:after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:4px;
+    background:rgba(255,255,255,.25);
+}
+
+/* زر الطاقة */
+.power{
+    position:absolute;
+    top:110px;
+    left:30px;
+    width:53px;
+    height:53px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+}
+
+.power-icon{
+    width:45px;
+    height:45px;
+    border:5px solid white;
+    border-radius:50%;
+    position:relative;
+}
+
+.power-icon:before{
+    content:"";
+    position:absolute;
+    width:5px;
+    height:23px;
+    background:white;
+    border-radius:5px;
+    top:-7px;
+    left:15px;
+}
+
+/* زر الإشعارات */
+.notification{
+    position:absolute;
+    top:110px;
+    right:27px;
+    width:52px;
+    height:55px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+}
+
+.bell{
+    position:relative;
+    width:29px;
+    height:33px;
+    border:3px solid white;
+    border-top-left-radius:17px;
+    border-top-right-radius:17px;
+    border-bottom:0;
+}
+
+.bell:before{
+    content:"";
+    position:absolute;
+    bottom:-5px;
+    left:-6px;
+    width:35px;
+    height:3px;
+    background:white;
+    border-radius:5px;
+}
+
+.bell:after{
+    content:"";
+    position:absolute;
+    bottom:-11px;
+    left:9px;
+    width:7px;
+    height:7px;
+    background:white;
+    border-radius:50%;
+}
+
+.notification-dot{
+    position:absolute;
+    top:2px;
+    right:4px;
+    width:9px;
+    height:9px;
+    background:#ffd000;
+    border-radius:50%;
+}
+
+/* شعار */
+.logo{
+    position:absolute;
+    top:75px;
+    left:50%;
+    transform:translateX(-50%);
+    text-align:center;
+    white-space:nowrap;
+}
+
+.logo-ar{
+    font-size:53px;
+    font-weight:900;
+    line-height:.8;
+    letter-spacing:-4px;
+    color:white;
+}
+
+.logo-en{
+    font-size:35px;
+    line-height:1;
+    font-weight:900;
+    letter-spacing:-2px;
+    color:#d7b233;
+    margin-top:5px;
+}
+
+/* ================= GREETING ================= */
+
+.greeting{
+    height:110px;
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    padding:0 38px;
+    font-size:25px;
+    border-bottom:1px solid #eee;
+}
+
+.greeting-ar{
+    direction:rtl;
+}
+
+.user-name{
+    font-weight:800;
+    margin-right:5px;
+}
+
+/* ================= MAIN ================= */
+
+.main{
+    background:#f8f8f8;
+    min-height:calc(100vh - 332px);
+    padding:45px 22px 50px;
+}
+
+/* شبكة الخدمات */
+
+.services{
+    max-width:760px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    column-gap:55px;
+    row-gap:43px;
+}
+
+/* بطاقة الخدمة */
+
+.service{
+    text-align:center;
+    cursor:pointer;
+    user-select:none;
+    transition:transform .15s ease;
+}
+
+.service:active{
+    transform:scale(.94);
+}
+
+/* الأيقونة */
+
+.icon{
+    width:112px;
+    height:94px;
+    margin:0 auto 15px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f04b55 0%,
+            #ed1725 48%,
+            #e60012 100%
+        );
+
+    border-radius:10px;
+
+    border:2px solid #a70b16;
+
+    box-shadow:
+        0 4px 7px rgba(0,0,0,.45),
+        inset 0 1px 2px rgba(255,255,255,.7);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:white;
+
+    font-size:48px;
+}
+
+/* أيقونات باستخدام رموز */
+.icon span{
+    filter:
+        drop-shadow(0 1px 1px rgba(0,0,0,.25));
+}
+
+/* النص */
+
+.service-title{
+    font-size:22px;
+    line-height:1.12;
+    font-weight:500;
+    color:#111;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+    z-index:1000;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:600px;
+    background:white;
+    border-radius:25px 25px 0 0;
+    padding:25px 22px 30px;
+    animation:slideUp .25s ease;
+}
+
+@keyframes slideUp{
+    from{
+        transform:translateY(100%);
+    }
+    to{
+        transform:translateY(0);
+    }
+}
+
+.modal-title{
+    font-size:23px;
+    font-weight:800;
+    margin-bottom:10px;
+}
+
+.modal-text{
+    color:#666;
+    line-height:1.8;
+}
+
+.close{
+    width:100%;
+    border:0;
+    background:#df0715;
+    color:white;
+    padding:15px;
+    border-radius:13px;
+    font-size:17px;
+    font-weight:bold;
+    margin-top:18px;
+}
+
+/* ================= DEMO LABEL ================= */
+
+.demo-label{
+    position:fixed;
+    left:8px;
+    bottom:8px;
+    z-index:2000;
+    background:rgba(0,0,0,.65);
+    color:white;
+    font-size:10px;
+    padding:5px 8px;
+    border-radius:8px;
+}
+
+/* ================= IPHONE ================= */
+
+@media(max-width:600px){
+
+    .header{
+        height:222px;
+    }
+
+    .logo{
+        top:78px;
+    }
+
+    .logo-ar{
+        font-size:48px;
+    }
+
+    .logo-en{
+        font-size:32px;
+    }
+
+    .greeting{
+        height:110px;
+        padding:0 36px;
+        font-size:23px;
+    }
+
+    .main{
+        padding:
+            48px 18px
+            calc(50px + env(safe-area-inset-bottom));
+    }
+
+    .services{
+        column-gap:28px;
+        row-gap:42px;
+    }
+
+    .icon{
+        width:105px;
+        height:90px;
+        font-size:43px;
+    }
+
+    .service-title{
+        font-size:20px;
+    }
+
+    .power{
+        left:20px;
+    }
+
+    .notification{
+        right:20px;
+    }
+}
+
+/* شاشات صغيرة جداً */
+
+@media(max-width:380px){
+
+    .services{
+        column-gap:14px;
+    }
+
+    .icon{
+        width:88px;
+        height:78px;
+        font-size:36px;
+    }
+
+    .service-title{
+        font-size:17px;
+    }
+
+    .greeting{
+        padding:0 20px;
+        font-size:19px;
+    }
+}
+
+/* شاشات أكبر */
+
+@media(min-width:700px){
+
+    .header{
+        height:220px;
+    }
+
+    .greeting{
+        height:110px;
+    }
+
+    .main{
+        padding-top:55px;
+    }
+
+    .icon{
+        width:115px;
+        height:95px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <!-- زر الطاقة -->
+    <div class="power" onclick="powerButton()">
+        <div class="power-icon"></div>
+    </div>
+
+    <!-- الشعار -->
+    <div class="logo">
+        <div class="logo-ar">بنكك</div>
+        <div class="logo-en">bankak</div>
+    </div>
+
+    <!-- الإشعارات -->
+    <div class="notification" onclick="openNotifications()">
+        <div class="bell"></div>
+        <div class="notification-dot"></div>
+    </div>
+
+</header>
+
+
+<!-- ================= GREETING ================= -->
+
+<section class="greeting">
+
+    <div class="greeting-ar">
+        مساء الخير،
+        <span class="user-name">Muhannad Ali</span>
+    </div>
+
+</section>
+
+
+<!-- ================= SERVICES ================= -->
+
+<main class="main">
+
+<div class="services">
+
+    <!-- 1 -->
+    <div class="service" onclick="openService('تفاصيل الحساب')">
+        <div class="icon">
+            <span>👤</span>
+        </div>
+        <div class="service-title">
+            تفاصيل<br>الحساب
+        </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="service" onclick="openService('دفع فواتير')">
+        <div class="icon">
+            <span>📄</span>
+        </div>
+        <div class="service-title">
+            دفع فواتير
+        </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="service" onclick="openService('تحويلات')">
+        <div class="icon">
+            <span>🔄</span>
+        </div>
+        <div class="service-title">
+            تحويلات
+        </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="service" onclick="openService('سحب بدون بطاقة')">
+        <div class="icon">
+            <span>🏧</span>
+        </div>
+        <div class="service-title">
+            سحب<br>بدون بطاقة
+        </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="service" onclick="openService('بنكك PAY')">
+        <div class="icon">
+            <span>▦</span>
+        </div>
+        <div class="service-title">
+            بنكك PAY
+        </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="service" onclick="openService('طلب الودائع الاستثمارية')">
+        <div class="icon">
+            <span>💰</span>
+        </div>
+        <div class="service-title">
+            طلب الودائع<br>الاستثمارية
+        </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="service" onclick="openService('إدارة المستفيدين')">
+        <div class="icon">
+            <span>👥</span>
+        </div>
+        <div class="service-title">
+            إدارة<br>المستفيدين
+        </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="service" onclick="openService('المعاملات السابقة')">
+        <div class="icon">
+            <span>📅</span>
+        </div>
+        <div class="service-title">
+            المعاملات<br>السابقة
+        </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="service" onclick="openService('إدارة البطاقات')">
+        <div class="icon">
+            <span>💳</span>
+        </div>
+        <div class="service-title">
+            إدارة البطاقات
+        </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="service" onclick="openService('الطلبات')">
+        <div class="icon">
+            <span>📝</span>
+        </div>
+        <div class="service-title">
+            الطلبات
+        </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="service" onclick="openService('أمر دفع دائم')">
+        <div class="icon">
+            <span>☑</span>
+        </div>
+        <div class="service-title">
+            أمر دفع دائم
+        </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="service" onclick="openService('الضبط')">
+        <div class="icon">
+            <span>⚙</span>
+        </div>
+        <div class="service-title">
+            الضبط
+        </div>
+    </div>
+
+    <!-- 13 -->
+    <div class="service" onclick="openService('خدمات العملات')">
+        <div class="icon">
+            <span>💱</span>
+        </div>
+        <div class="service-title">
+            خدمات العملات
+        </div>
+    </div>
+
+    <!-- 14 -->
+    <div class="service" onclick="openService('التجارة الإلكترونية')">
+        <div class="icon">
+            <span>🛒</span>
+        </div>
+        <div class="service-title">
+            التجارة<br>الإلكترونية
+        </div>
+    </div>
+
+</div>
+
+</main>
+
+
+<!-- ================= MODAL ================= -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-box">
+
+        <div class="modal-title" id="modalTitle"></div>
+
+        <div class="modal-text" id="modalText">
+            هذه واجهة تجريبية للخدمة.
+        </div>
+
+        <button class="close" onclick="closeModal()">
+            إغلاق
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="demo-label">
+    DEMO
+</div>
+
+
+<script>
+
+/* فتح الخدمة */
+
+function openService(service){
+
+    document.getElementById("modalTitle").textContent = service;
+
+    document.getElementById("modalText").textContent =
+        "هذه صفحة تجريبية لخدمة " +
+        service +
+        ". يمكن تطوير هذه الصفحة لاحقاً وإضافة الوظائف الحقيقية الخاصة بالخدمة.";
+
+    document.getElementById("modal").classList.add("show");
+}
+
+
+/* إغلاق */
+
+function closeModal(){
+
+    document.getElementById("modal").classList.remove("show");
+}
+
+
+/* الإشعارات */
+
+function openNotifications(){
+
+    document.getElementById("modalTitle").textContent =
+        "الإشعارات";
+
+    document.getElementById("modalText").textContent =
+        "لا توجد إشعارات جديدة في النسخة التجريبية.";
+
+    document.getElementById("modal").classList.add("show");
+}
+
+
+/* زر الطاقة */
+
+function powerButton(){
+
+    const result = confirm(
+        "هل تريد تسجيل الخروج من النسخة التجريبية؟"
+    );
+
+    if(result){
+
+        document.getElementById("modalTitle").textContent =
+            "تسجيل الخروج";
+
+        document.getElementById("modalText").textContent =
+            "تم تنفيذ العملية تجريبياً.";
+
+        document.getElementById("modal").classList.add("show");
+    }
+}
+
+
+/* الضغط خارج النافذة */
+
+document.getElementById("modal").addEventListener(
+    "click",
+    function(e){
+
+        if(e.target === this){
+            closeModal();
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
